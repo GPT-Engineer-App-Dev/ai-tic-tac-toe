@@ -10,7 +10,6 @@ const TicTacToe = () => {
     if (board[index] || winner) return;
     const newBoard = [...board];
     newBoard[index] = isXNext ? 'X' : 'O'; // Respect isXNext for player's move
-    setBoard(newBoard);
     setIsXNext(!isXNext); // Toggle isXNext immediately after player's move
 
     // Check if game is not over before computer makes a move
@@ -19,7 +18,6 @@ const TicTacToe = () => {
       if (computerMove !== -1) {
         newBoard[computerMove] = isXNext ? 'X' : 'O'; // Computer's move based on updated isXNext
         setBoard(newBoard);
-        setIsXNext(!isXNext); // Toggle isXNext after computer's move
       }
     }
   };
