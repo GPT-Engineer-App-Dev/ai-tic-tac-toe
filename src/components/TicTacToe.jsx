@@ -9,16 +9,16 @@ const TicTacToe = () => {
   const handleClick = (index) => {
     if (board[index] || winner) return;
     const newBoard = [...board];
-    newBoard[index] = isXNext ? 'X' : 'O'; // Respect isXNext for player's move
-    setIsXNext(!isXNext); // Ensure isXNext toggles right after player's move
+    newBoard[index] = isXNext ? 'X' : 'O'; // Player's move
+    setIsXNext(!isXNext); // Toggle turn right after player's move
 
     // Check if game is not over before computer makes a move
     if (!calculateWinner(newBoard) && newBoard.includes(null)) {
       const computerMove = findBestMove(newBoard);
       if (computerMove !== -1) {
-        newBoard[computerMove] = isXNext ? 'X' : 'O'; // Computer's move based on updated isXNext
+        newBoard[computerMove] = !isXNext ? 'X' : 'O'; // Computer's move based on the opposite of current isXNext
         setBoard(newBoard);
-        setIsXNext(!isXNext); // Ensure isXNext toggles right after computer's move
+        setIsXNext(!isXNext); // Toggle turn right after computer's move
       }
     }
   };
