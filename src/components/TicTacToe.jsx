@@ -9,8 +9,13 @@ const TicTacToe = () => {
   const handleClick = (index) => {
     if (board[index] || winner) return;
     const newBoard = [...board];
-    newBoard[index] = isXNext ? 'X' : 'O';
+    newBoard[index] = 'X'; // Player's move
     setBoard(newBoard);
+    const computerMove = findBestMove(newBoard);
+    if (computerMove !== -1) {
+      newBoard[computerMove] = 'O'; // Computer's move
+      setBoard(newBoard);
+    }
     setIsXNext(!isXNext);
   };
 
@@ -51,6 +56,13 @@ function calculateWinner(squares) {
     }
   }
   return null;
+}
+
+function findBestMove(board) {
+  for (let i = 0; i < board.length; i++) {
+    if (!board[i]) return i; // Simple AI: choose the first available spot
+  }
+  return -1; // No moves left
 }
 
 export default TicTacToe;
